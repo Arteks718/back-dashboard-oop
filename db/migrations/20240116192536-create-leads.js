@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Leads', {
+    await queryInterface.createTable('leads', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -26,33 +26,34 @@ module.exports = {
       country: {
         type: Sequelize.STRING,
         validate: {
-          max: 64
+          len: [0, 64]
         }
       },
       ip_address: {
         type: Sequelize.STRING,
         validate: {
-          isEmail: true
+          isIPv4: true
         }
       },
       user_id: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         validate: {
-          max: 13
+          isInt: true
         }
       },
       sales_manager_id: {
         type: Sequelize.INTEGER,
-        references: { 
-          model: "SalesManagers", 
-          key: "id",
-          onDelete: 'RESTRICT',
-          onUpdate: 'CASCADE'
-        }
+        references: {
+          model: "sales_managers",
+          key: "id"
+        },
+        onDelete: 'RESTRICT',
+        onUpdate: 'CASCADE',
+        allowNull: true
       },
       status: {
         type: Sequelize.ENUM,
-        values: ['checked','unchecked', 'spam'],
+        values: ['checked', 'unchecked', 'spam'],
       },
       created_at: {
         allowNull: false,
@@ -65,6 +66,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Leads');
+    await queryInterface.dropTable('leads');
   }
 };
