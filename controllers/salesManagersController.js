@@ -9,7 +9,7 @@ module.exports = {
         raw: true,
         attributes: { exclude: ["createdAt", "updatedAt"] },
       });
-      res.status(200).send(listSalesManagers);
+      res.status(200).json({ data: listSalesManagers });
     } catch (error) {
       next(error);
     }
@@ -25,7 +25,7 @@ module.exports = {
       if (!salesManagerById) {
         return next(createHttpError(404, "Sales manager not found"));
       }
-      res.status(200).send(salesManagerById)
+      res.status(200).json({data: salesManagerById})
     } catch (error) {
       next(error);
     }
@@ -38,7 +38,7 @@ module.exports = {
         return next(createHttpError(500, "Server Error"));
       }
       const preparedResponse = _.omit(createdSalesManager.get(), ["updatedAt"]);
-      res.status(201).send(preparedResponse);
+      res.status(201).json({ data: preparedResponse });
     } catch (error) {
       next(error);
     }
@@ -57,7 +57,7 @@ module.exports = {
       if(!updatedSalesManager) {
         return next(createHttpError(404, "Sales manager not found"))
       }
-      res.status(200).send(updatedSalesManager)
+      res.status(200).json({ data: updatedSalesManager })
     } catch (error) {
       next(error)
     }
