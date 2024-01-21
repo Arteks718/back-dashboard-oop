@@ -27,13 +27,13 @@ module.exports = (sequelize, DataTypes) => {
           max: 64,
         },
       },
-      ip_address: {
+      ipAddress: {
         type: DataTypes.STRING,
         validate: {
           isIPv4: true,
         },
       },
-      user_id: {
+      userId: {
         type: DataTypes.NUMBER,
         validate: {
           max: 13,
@@ -42,6 +42,7 @@ module.exports = (sequelize, DataTypes) => {
       status: {
         type: DataTypes.ENUM,
         values: ["checked", "unchecked", "spam"],
+        defaultValue: "unchecked"
       },
     },
     {

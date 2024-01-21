@@ -54,6 +54,7 @@ module.exports = {
       status: {
         type: Sequelize.ENUM,
         values: ['checked', 'unchecked', 'spam'],
+        defaultValue: "unchecked"
       },
       created_at: {
         allowNull: false,
