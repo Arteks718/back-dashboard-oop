@@ -19,6 +19,7 @@ module.exports = {
       email: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
         validate: {
           isEmail: true
         }
@@ -36,10 +37,11 @@ module.exports = {
         }
       },
       user_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
+        unique: true,
         validate: {
-          isInt: true
-        }
+          len: [0, 14]
+        },
       },
       sales_manager_id: {
         type: Sequelize.INTEGER,

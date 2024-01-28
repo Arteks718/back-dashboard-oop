@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       email: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
         validate: {
           isEmail: true,
         },
@@ -34,9 +35,10 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       userId: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.STRING,
+        unique: true,
         validate: {
-          max: 13,
+          len: [12, 14]
         },
       },
       status: {
