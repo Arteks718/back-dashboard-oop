@@ -8,6 +8,7 @@ const app = express();
 app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use("/api", appRouter)
+app.use(express.static('public'))
 app.use(errorHandlers.dbErrorHandler, errorHandlers.errorHandler)
 
 module.exports = app;
