@@ -14,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "default",
+    "password": "cL4MTWnmpl9Z",
+    "database": "verceldb",
+    "host": "ep-misty-firefly-01780304-pooler.eu-central-1.postgres.vercel-storage.com",
+    "dialect": "postgres"
   }
 }
