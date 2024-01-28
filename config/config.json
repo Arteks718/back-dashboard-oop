@@ -18,6 +18,12 @@
     "password": "cL4MTWnmpl9Z",
     "database": "verceldb",
     "host": "ep-misty-firefly-01780304-pooler.eu-central-1.postgres.vercel-storage.com",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   }
 }
