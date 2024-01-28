@@ -7,7 +7,7 @@ module.exports.dbErrorHandler = (err, req, res, next) => {
     return res.status(422).send(err.errors);
   }
   if (err instanceof BaseError) {
-    return next(createHttpError(500, "Database Error"));
+    return next(createHttpError(500, `Database Error ${err.message}`));
   }
   next(err)
 };

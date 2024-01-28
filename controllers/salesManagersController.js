@@ -7,7 +7,10 @@ module.exports = {
     try {
       const listSalesManagers = await SalesManagers.findAll({
         raw: true,
-        attributes: { exclude: ["createdAt", "updatedAt"] },
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+        order: [["id", "ASC"]],
       });
       res.status(200).json({ data: listSalesManagers });
     } catch (error) {
@@ -16,7 +19,7 @@ module.exports = {
   },
   getSalesManagerById: async (req, res, next) => {
     const { salesManagerId } = req.params;
-    console.log(salesManagerId)
+    console.log(salesManagerId);
     try {
       const salesManagerById = await SalesManagers.findByPk(salesManagerId, {
         raw: true,
@@ -25,7 +28,7 @@ module.exports = {
       if (!salesManagerById) {
         return next(createHttpError(404, "Sales manager not found"));
       }
-      res.status(200).json({data: salesManagerById})
+      res.status(200).json({ data: salesManagerById });
     } catch (error) {
       next(error);
     }
@@ -44,7 +47,10 @@ module.exports = {
     }
   },
   updateSalesManagerById: async (req, res, next) => {
-    const { params: { salesManagerId }, body } = req;
+    const {
+      params: { salesManagerId },
+      body,
+    } = req;
     try {
       const [, [updatedSalesManager]] = await SalesManagers.update(body, {
         where: {
@@ -52,30 +58,32 @@ module.exports = {
         },
         raw: true,
         attributes: { exclude: ["updatedAt"] },
-        returning: true
-      })
-      if(!updatedSalesManager) {
-        return next(createHttpError(404, "Sales manager not found"))
+        returning: true,
+      });
+      if (!updatedSalesManager) {
+        return next(createHttpError(404, "Sales manager not found"));
       }
-      res.status(200).json({ data: updatedSalesManager })
+      res.status(200).json({ data: updatedSalesManager });
     } catch (error) {
-      next(error)
+      next(error);
     }
   },
   deleteSalesManagerById: async (req, res, next) => {
-    const { params: { salesManagerId } } = req;
+    const {
+      params: { salesManagerId },
+    } = req;
     try {
       const deletedSalesManager = await SalesManagers.destroy({
         where: {
-          id: salesManagerId
-        }
-      })
-      if(!deletedSalesManager) {
-        return next(createHttpError(404, "Sales manager not deleted"))
+          id: salesManagerId,
+        },
+      });
+      if (!deletedSalesManager) {
+        return next(createHttpError(404, "Sales manager not deleted"));
       }
       res.status(200).end();
     } catch (error) {
-      next(error)
+      next(error);
     }
-  }
+  },
 };
